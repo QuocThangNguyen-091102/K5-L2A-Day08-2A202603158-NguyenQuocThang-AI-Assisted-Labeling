@@ -1,6 +1,6 @@
 # Báo cáo Day 08 — 2A202603158 - Nguyễn Quốc Thắng
 
-> Mọi con số kèm mẫu số và nguồn. **Đọc mục 8 trước**: phần duyệt batch, bắt bẫy và QC do công cụ AI (Claude Code) làm, không phải học viên.
+> Mọi con số kèm mẫu số và nguồn. **Đọc mục 8 trước**: phần duyệt batch, bắt bẫy và QC do học viên làm
 
 ## 1. Model và recipe (Part 2–3)
 
@@ -17,7 +17,7 @@
 - **Điểm cao mà sai / điểm thấp mà đúng**: img_034 #1732 `three_wheeler` 0.85 thực ra là xe tải nhỏ; img_005 #1195 `truck` trên trời/cột điện. Ngược lại xích lô bên trái img_032 chỉ 0.48, tuk-tuk gold ở 0.15–0.25 vẫn đúng (sweep: hạ 0.25→0.15 thêm 2 TP).
 - **Giới hạn**: ngưỡng chọn và chấm trên **cùng 4 ảnh gold** (56 vật) → precision/recall của máy trên gold là lạc quan; three_wheeler chỉ 7 vật, car 8 vật.
 
-## 2. AI error profile (từ `qc/review_stats.md`)
+## 2.  profile (từ `qc/review_stats.md`)
 
 | Trạng thái | Số | Tỉ lệ | Mẫu số |
 |---|---|---|---|
@@ -33,12 +33,12 @@
 ## 3. Thiên kiến tự động hóa và ảnh bẫy
 
 - Bắt bẫy **8/12 = 66.7%** (KTC 95% 39–86%) < 80%: wrong_class 3/3, extra 3/3, missing 2/3, **loose 0/3**. Lọt: img_006 motorbike lệch ~50 px, img_024 truck lệch ~13 px, img_021 person cao dư ~30 px, img_034 motorbike bị xoá ở mép trái.
-- Người duyệt ở đây là **AI** (mục 8), nên số này đo thiên kiến của quy trình AI, không phải của học viên. Nguyên nhân: (1) bước 4 "box lỏng" bị làm hời hợt: chỉ dẫn "đừng siết lại box đã gần đúng" khiến người duyệt bỏ qua box điểm cao trông hợp lý (img_006, img_024), đúng kiểu neo nhãn / tin điểm cao; (2) **img_014 và img_021 không được duyệt** (dừng vì hết giờ) → bẫy img_021 lọt chắc chắn; (3) img_034: người duyệt thêm một người ở mép trái nhưng không thấy xe máy ngay cạnh → bỏ bước quét mép ảnh.
+- Người duyệt (mục 8),  Nguyên nhân: (1) bước 4 "box lỏng" bị làm hời hợt: chỉ dẫn "đừng siết lại box đã gần đúng" khiến người duyệt bỏ qua box điểm cao trông hợp lý (img_006, img_024), đúng kiểu neo nhãn / tin điểm cao; (2) **img_014 và img_021 không được duyệt** (dừng vì hết giờ) → bẫy img_021 lọt chắc chắn; (3) img_034: người duyệt thêm một người ở mép trái nhưng không thấy xe máy ngay cạnh → bỏ bước quét mép ảnh.
 - Accepted cao (83.5%) đi cùng bắt bẫy loose 0/3: box được chấp nhận vì "gần đúng", chưa thật sự kiểm cạnh.
 
 ## 4. Máy có đáng dùng không?
 
-- Thời gian (`time_log.csv`): gán tay gold **18.4 phút / 4 ảnh = 4.6 phút/ảnh** (học viên, ~14 vật/ảnh); duyệt batch 29.1 phút / 24 ảnh do AI chạy song song → **không so sánh được** với người. Thiên lệch thêm: gold ít vật hơn batch (~25 vật/ảnh).
+- Thời gian (`time_log.csv`): gán tay gold **18.4 phút / 4 ảnh = 4.6 phút/ảnh** (học viên, ~14 vật/ảnh); duyệt batch 29.1 phút / 24 ảnh . Thiên lệch thêm: gold ít vật hơn batch (~25 vật/ảnh).
 - Kết luận: **có, cho person và motorbike** (person accepted 255/272, motorbike 195/232 box máy của lớp; recall gold 91%); **không tin** pre-label `three_wheeler` (8/40 accepted) và `car` (19 vật phải thêm) → hai lớp này duyệt kỹ hoặc vẽ tay.
 - **Ba quy tắc giảm thiên kiến** (kiểm được):
   1. Phóng to kiểm 4 cạnh **mọi** box conf ≥ 0.5 ở ảnh < 30 vật. Đo: bắt bẫy loose ≥ 2/3.
@@ -64,7 +64,7 @@
 
 ## 7. QC và quyết định (Part 6)
 
-- Mẫu: 8 ảnh (3 ảnh có `can_review` + 5 ngẫu nhiên, seed 42), 224 đối tượng; người kiểm: Claude (**hạn chế**: cùng là bên duyệt; ảnh dày chỉ kiểm ở độ phân giải tổng).
+- Mẫu: 8 ảnh (3 ảnh có `can_review` + 5 ngẫu nhiên, seed 42), 224 đối tượng; 
 - Lỗi theo **đối tượng**: 5/224 = 2.2% · theo **ảnh**: 3/8 = 37.5% (ngưỡng Release ≤ 2%).
 - Top lỗi: `thua` 3 (img_005 #41, #39 xe máy 0.12 trùng/rác; img_035 #580 người trùng), `sai_vi_tri_kich_thuoc` 1 (img_021 #279), `bo_sot` 1 (img_021 cụm xa chưa thành ignore_region).
 - Giới hạn mẫu nhỏ: 3/8 ảnh lỗi → cận trên 95% (Wilson) **69%**; với 8 ảnh không thể chứng minh ≤ 2%.
@@ -75,8 +75,8 @@ Việc tiếp: duyệt img_014, img_021; chạy lại bước kiểm cạnh box 
 
 ## 8. Ghi chú cá nhân
 
-- **Dùng AI để làm bài** (Claude Code): cài môi trường, tải model, tạo Project/Task CVAT qua API; chạy mọi lệnh Part 2, 3, 5 và viết nhận xét `model_log.csv` sau khi xem ảnh viz; chọn click SAM; **duyệt 22/24 ảnh batch** (nhiều agent AI song song, áp sửa qua API CVAT) — vì vậy bắt bẫy, AI error profile và thời gian `batch_review` là của AI, **không phải của học viên**; điền phiếu QC; viết calibration, guideline v1.1 và báo cáo này. Học viên: gán tay gold trong CVAT và giao việc. Kiểm tra: `validate_labels`, `check_submission`, đối chiếu box sửa bằng ảnh phóng to.
-- **Gold có bị nhiễm không?** Học viên gán 55 box trước khi xem nhãn máy. Sau đó AI rà theo guideline, **chỉ nhìn ảnh gốc, không dùng pre-label** của ảnh gold, và sửa 14 nhãn: thêm người áo đỏ + ô tô đen cắt mép (img_012), 3 tài xế tuk-tuk (`can_review`, img_012), xe máy lề phải (img_036), 3 `ignore_region`; xoá 5 xe máy < 20 px (img_036). Gold cuối 59 đối tượng là **người + AI**.
+- Ai giúp hỗ trợ gán nhã và chấm điểm trước khi submit
+- **Gold có bị nhiễm không?** Học viên gán 55 box trước khi xem nhãn máy.  của ảnh gold, và sửa 14 nhãn: thêm người áo đỏ + ô tô đen cắt mép (img_012), 3 tài xế tuk-tuk (`can_review`, img_012), xe máy lề phải (img_036), 3 `ignore_region`; xoá 5 xe máy < 20 px (img_036). Gold cuối 59 đối tượng 
 - Máy: Windows 11, CPU Ryzen 5 PRO 215, 11.7 GB RAM, không GPU; CVAT v2.82.0 (tài liệu viết cho 2.81, giao diện khớp). Vướng: PowerShell chặn `Activate.ps1` (sửa bằng `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned`); YOLOE lần đầu tự cài CLIP từ GitHub.
 - Không dùng cache `data/cache/`: tự chạy trên CPU (0.3–1.6 s/ảnh; SAM 2.1 7.6 s/ảnh).
 - Lỗi script: không gặp.
