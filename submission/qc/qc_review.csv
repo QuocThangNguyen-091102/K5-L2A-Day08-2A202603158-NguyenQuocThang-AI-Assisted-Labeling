@@ -1,0 +1,11 @@
+image,object_id,error_type,reviewer,note
+img_003.jpg,,khong,claude,"Xe ba gác #21 ôm cả mui; người trên xe (#13,#5,#23) tách box riêng. Vật xa trái (<30 px) chỉ kiểm ở độ phân giải ảnh tổng."
+img_004.jpg,,khong,claude,"4 tuk-tuk đều three_wheeler (#25,#26,#29,#32); hành khách #24 và người #28 sau xe đúng quy tắc."
+img_005.jpg,41,thua,claude,"motorbike 0.12 nằm trên lưng người áo trắng, không thấy xe máy riêng (nghi box rác điểm thấp)."
+img_005.jpg,39,thua,claude,"motorbike 0.12 chồng lên xe #62 (nghi trùng)."
+img_009.jpg,,khong,claude,"Xe máy chở chuối #121 không gồm tấm hàng nhô ra (>20%, guideline 4.1.5)."
+img_017.jpg,,khong,claude,"3 tuk-tuk + 4 người đúng lớp, box sát."
+img_018.jpg,,khong,claude,"Ảnh dày nhìn từ trên cao; 2 ignore_region phủ cụm xa; chỉ kiểm ở độ phân giải ảnh tổng, không phóng từng vật."
+img_021.jpg,279,sai_vi_tri_kich_thuoc,claude,"person 0.88 giữa đường: cạnh trên cao hơn đầu ~30 px (box lỏng). Ảnh này CHƯA được duyệt (agent bị dừng do hết giờ)."
+img_021.jpg,,bo_sot,claude,"Đám xe máy dày ở xa giữa ảnh vẫn là nhiều box nhỏ điểm thấp (0.14–0.18), chưa gom thành ignore_region theo 4.1.6 (ảnh chưa duyệt)."
+img_035.jpg,580,thua,claude,"person 0.36 trùng với #609 (cùng người đàn ông mép trái)."

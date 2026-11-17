@@ -1,2 +1,3 @@
 step,images,minutes,note
 gold_manual,4,18.4,"Học viên gán tay trong CVAT job 6. Số lấy từ log sự kiện CVAT (không bấm tay): 15:25:13→15:43:35 UTC = 18.4 phút trong job; CVAT working_time (thời gian thao tác thực) = 12.5 phút. 55 box = 4.6 phút/ảnh. Sau đó Claude rà theo guideline (thêm/sửa 14 nhãn, xem REPORT mục 8) — không tính vào số này."
+batch_review,24,29.1,"KHÔNG phải học viên duyệt: Claude (4 agent song song + áp sửa) 23:00→23:29. Đồng hồ thực 29.1 phút = 1.2 phút/ảnh, nhưng là nhiều agent chạy song song nên không so sánh được với người. img_014 và img_021 chưa duyệt (dừng do hết giờ)."
