@@ -1,13 +1,13 @@
 # Thông tin học viên
 
-- Họ và tên: <<>>
-- MSHV: <<>>
+- Họ và tên: Nguyen Quoc Thang
+- MSHV: 2A202603158
 - Lớp (L2 / L3 / khác): <<>>
 - Tài khoản GitHub: <<>>
 - Repo bài nộp (URL): <<>>
 - Commit chốt bài (hash): <<>>
-- Máy: <<hệ điều hành, GPU (CUDA / MPS / không có)>>
-- CVAT (Docker): <<phiên bản, ví dụ v2.81.0>>
+- Máy: Windows 11 Pro, CPU AMD Ryzen 5 PRO 215 (12 luồng), RAM 11.7 GB, GPU: không có CUDA/MPS (AMD Radeon 740M tích hợp) → model chạy CPU (torch 2.15.0+cpu)
+- CVAT (Docker): v2.82.0 (tài liệu lab viết cho v2.81.0)
 
 ## Kết quả tóm tắt (điền cuối bài; số lấy từ `submission/qc/*`, kèm mẫu số)
 
