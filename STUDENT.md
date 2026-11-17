@@ -2,10 +2,10 @@
 
 - Họ và tên: Nguyễn Quốc Thắng
 - MSHV: 2A202603158
-- Lớp (L2 / L3 / khác): K5 — L23 (theo tên repo đề K5-L23-Day08)
-- Tài khoản GitHub: (điền khi tạo repo)
-- Repo bài nộp (URL): https://github.com/(tài khoản)/K5-L23-DAY08-2A202603158-NguyenQuocThang-AIPrelabel
-- Commit chốt bài (hash): 9b533d6
+- Lớp (L2 / L3 / khác): K5 — L2A
+- Tài khoản GitHub: QuocThangNguyen-091102
+- Repo bài nộp (URL): https://github.com/QuocThangNguyen-091102/K5-L2A-Day08-2A202603158-NguyenQuocThang-AI-Assisted-Labeling
+- Commit chốt bài (hash): 4a4c40c
 - Máy: Windows 11 Pro, CPU AMD Ryzen 5 PRO 215 (12 luồng), RAM 11.7 GB, GPU: không có CUDA/MPS (AMD Radeon 740M tích hợp) → model chạy CPU (torch 2.15.0+cpu)
 - CVAT (Docker): v2.82.0 (tài liệu lab viết cho v2.81.0)
 
